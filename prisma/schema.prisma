@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:/dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  userName  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Material Material[]
+  Record   Record[]
+}
+
+model Category {
+  id        Int        @id @default(autoincrement())
+  priority  Int
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Material  Material[]
+}
+
+model Material {
+  id           Int      @id @default(autoincrement())
+  name         String
+  presentation String
+  User         User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  userId       Int
+  Category     Category @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  categoryId   Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  Record       Record[]
+}
+
+model Record {
+  id         Int        @id @default(autoincrement())
+  batch      String     @unique
+  materialId Int
+  Material   Material   @relation(fields: [materialId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  expires    DateTime
+  quantity   Int
+  User       User       @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  userId     Int
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  Movement   Movement[]
+}
+
+model Movement {
+  id        Int      @id @default(autoincrement())
+  recordId  Int
+  Record    Record   @relation(fields: [recordId], references: [id], onDelete: Restrict)
+  quantity  Int
+  createdAt DateTime @default(now())
+}
