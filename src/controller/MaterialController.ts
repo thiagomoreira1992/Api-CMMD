@@ -14,8 +14,7 @@ export class MaterialController {
 
     try {
       const materialCheck = await prisma.material.findFirst({
-        where: {name, presentation,
-        },
+        where: { name, presentation },
       });
 
       if (materialCheck) {
@@ -40,9 +39,68 @@ export class MaterialController {
       return res.status(500).json(error);
     }
   }
-  
 
-//   async update(req: Request, res: Response){
-//       const
-//   }
+  async update(req: Request, res: Response) {
+    const { id, name, presentation, userId, categoryId } = req.body;
+
+    // const id = parseInt(idString)
+
+    const materialCheck = await prisma.material.findUnique({
+      where: { id },
+    });
+
+    if (!materialCheck) {
+      return res.status(400).json("material não existe");
+    } else {
+      try {
+        const material = await prisma.material.update({
+          where: { id },
+          data: {
+            name,
+            presentation,
+            userId,
+            categoryId,
+          },
+        });
+
+        return res.status(201).json({ material });
+      } catch (error) {
+        res
+          .status(500)
+          .json({ Error: "An error was appeared, contact administrator" });
+      }
+    }
+  }
+
+  async listALl(res: Response) {
+    const material = await prisma.material.findMany();
+
+    return res.status(200).json({ material });
+  }
+
+  async delete(req: Request, res: Response) {
+    const { id } = req.body;
+
+    const materialCheck = await prisma.material.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!materialCheck) {
+      return res.status(401).json({ Error: "Material não existe" });
+    } else {
+      try {
+        const material = await prisma.material.delete({
+          where:{
+            id
+          }
+        })
+
+        return console.log(material)
+      } catch (error) {
+        return res.status(401).json({error})
+      }
+    }
+  }
 }
