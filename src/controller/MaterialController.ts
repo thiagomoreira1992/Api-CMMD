@@ -91,15 +91,22 @@ export class MaterialController {
       return res.status(401).json({ Error: "Material não existe" });
     } else {
       try {
-        const material = await prisma.material.delete({
+        await prisma.material.delete({
           where:{
             id
           }
         })
+        
+        return res.status(201).json({Message: "Material was deleted"})   
 
-        return console.log(material)
       } catch (error) {
-        return res.status(401).json({error})
+        const stringError: string = error + "";
+
+        if(stringError.includes("foreign")){
+          return res.status(401).json({Error: "Material has a record"})
+        }else{
+          return res.status(500).json({Error: "error"})
+        }
       }
     }
   }
