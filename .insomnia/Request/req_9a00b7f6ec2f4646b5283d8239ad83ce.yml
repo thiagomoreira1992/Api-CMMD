@@ -1,0 +1,29 @@
+_id: req_9a00b7f6ec2f4646b5283d8239ad83ce
+type: Request
+parentId: fld_abe6e24d08a042c3a23819dc83fd9b32
+modified: 1673820127957
+created: 1673819655448
+url: http://localhost:3333/users/create
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"userName": "Thiago",
+    	"password": "123456"
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1673819886240.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
