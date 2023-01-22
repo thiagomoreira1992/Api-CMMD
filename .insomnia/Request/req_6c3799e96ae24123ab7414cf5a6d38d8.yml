@@ -1,0 +1,31 @@
+_id: req_6c3799e96ae24123ab7414cf5a6d38d8
+type: Request
+parentId: fld_9008de4152a0400d8e680f1dfb4aee4f
+modified: 1674399018468
+created: 1674398336117
+url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}/"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name" : "Buscopan",
+    	"presentation" : "Ampola",
+    	"userId": 1,
+    	"categoryId": 1
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674398336117
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

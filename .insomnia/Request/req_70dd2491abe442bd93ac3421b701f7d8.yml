@@ -1,0 +1,29 @@
+_id: req_70dd2491abe442bd93ac3421b701f7d8
+type: Request
+parentId: fld_8bb85ea8f8a643569b1e5ed59e90637d
+modified: 1674398893349
+created: 1674398562490
+url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"name" : "Medicamento",
+    	"priority" : 5
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674398562490
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

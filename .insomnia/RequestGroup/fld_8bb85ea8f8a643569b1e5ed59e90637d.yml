@@ -1,0 +1,13 @@
+_id: fld_8bb85ea8f8a643569b1e5ed59e90637d
+type: RequestGroup
+parentId: wrk_08f84718ad8f4568b033759e4b7a25d4
+modified: 1674398528620
+created: 1674398506835
+name: Category
+description: ""
+environment:
+  RESOURCE: category
+environmentPropertyOrder:
+  "&":
+    - RESOURCE
+metaSortKey: -1674398506835

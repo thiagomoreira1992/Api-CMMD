@@ -1,17 +1,17 @@
-_id: req_cbadbb72151545c5a0e6c4ecf5636765
+_id: req_14fe7940bfe4426eb4fe1e7389d67c76
 type: Request
-parentId: fld_761a923ba58040d79e1e4cf58c7cb415
-modified: 1674408092960
-created: 1673819369101
+parentId: fld_c4807e22c4b64bb6a5693d2ac2027cc1
+modified: 1674408985135
+created: 1674408796796
 url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
-name: List All
+name: ListAll
 description: ""
 method: GET
 body: {}
 parameters: []
 headers: []
 authentication: {}
-metaSortKey: -1673819369102
+metaSortKey: -1674408796796
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

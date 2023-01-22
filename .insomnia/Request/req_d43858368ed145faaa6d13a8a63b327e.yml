@@ -1,0 +1,29 @@
+_id: req_d43858368ed145faaa6d13a8a63b327e
+type: Request
+parentId: fld_c4807e22c4b64bb6a5693d2ac2027cc1
+modified: 1674410495622
+created: 1674409168199
+url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"recordId" : 1,
+    	"quantity": 1
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674409168199
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

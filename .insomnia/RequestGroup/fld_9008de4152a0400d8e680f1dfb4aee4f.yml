@@ -1,10 +1,13 @@
 _id: fld_9008de4152a0400d8e680f1dfb4aee4f
 type: RequestGroup
 parentId: wrk_08f84718ad8f4568b033759e4b7a25d4
-modified: 1673819612275
+modified: 1674398440235
 created: 1673819612275
 name: Material
 description: ""
-environment: {}
-environmentPropertyOrder: null
+environment:
+  RESOURCE: material
+environmentPropertyOrder:
+  "&":
+    - RESOURCE
 metaSortKey: -1673819612275

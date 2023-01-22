@@ -1,17 +1,25 @@
-_id: req_cbadbb72151545c5a0e6c4ecf5636765
+_id: req_78b8785c9cb142ebaee3e8d151cbb91b
 type: Request
 parentId: fld_761a923ba58040d79e1e4cf58c7cb415
-modified: 1674408092960
-created: 1673819369101
+modified: 1674405342654
+created: 1674405285375
 url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
-name: List All
+name: Delete
 description: ""
-method: GET
-body: {}
+method: DELETE
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"recordId": 2,
+    	"userId": 1
+    }
 parameters: []
-headers: []
+headers:
+  - name: Content-Type
+    value: application/json
 authentication: {}
-metaSortKey: -1673819369102
+metaSortKey: -1674405285375
 isPrivate: false
 settingStoreCookies: true
 settingSendCookies: true

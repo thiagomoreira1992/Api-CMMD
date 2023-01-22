@@ -1,10 +1,13 @@
 _id: fld_761a923ba58040d79e1e4cf58c7cb415
 type: RequestGroup
 parentId: wrk_08f84718ad8f4568b033759e4b7a25d4
-modified: 1673819366207
+modified: 1674399070257
 created: 1673819366207
 name: Records
 description: ""
-environment: {}
-environmentPropertyOrder: null
+environment:
+  RESOURCE: records
+environmentPropertyOrder:
+  "&":
+    - RESOURCE
 metaSortKey: -1673819366207
