@@ -3,9 +3,11 @@ import { prisma } from "../database/client";
 
 export class CategoryController {
   async store(req: Request, res: Response) {
-    const { name, priority: priorityString } = req.body;
+    const { name, priority } = req.body;
 
-    const priority = parseInt(priorityString);
+    console.log(typeof(priority))
+
+    // const priority = parseInt(priorityString);
 
     try {
       const category = await prisma.category.create({

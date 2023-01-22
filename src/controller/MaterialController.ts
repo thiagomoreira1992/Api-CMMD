@@ -6,11 +6,9 @@ export class MaterialController {
     const {
       name,
       presentation,
-      userId: userIdString,
-      categoryId: categoryIdString,
+      userId,
+      categoryId
     } = req.body;
-    const userId = parseInt(userIdString);
-    const categoryId = parseInt(categoryIdString);
 
     try {
       const materialCheck = await prisma.material.findFirst({
