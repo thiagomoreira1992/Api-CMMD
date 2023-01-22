@@ -1,0 +1,32 @@
+_id: req_3781e39ed7194834b848b1ec29af9475
+type: Request
+parentId: fld_761a923ba58040d79e1e4cf58c7cb415
+modified: 1674408360652
+created: 1674400278628
+url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+name: Update
+description: ""
+method: PUT
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"recordId": 1,
+    	"batch": "sda",
+    	"expires" : "2023-04-31",
+    	"quantity": 200,
+    	"userId" : 4
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674400278628
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

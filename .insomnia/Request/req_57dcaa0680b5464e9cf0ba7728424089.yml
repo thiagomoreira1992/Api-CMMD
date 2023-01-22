@@ -1,0 +1,32 @@
+_id: req_57dcaa0680b5464e9cf0ba7728424089
+type: Request
+parentId: fld_761a923ba58040d79e1e4cf58c7cb415
+modified: 1674405243942
+created: 1674399050767
+url: "{{ _.BASE_URL }}/{{ _.RESOURCE }}"
+name: Create
+description: ""
+method: POST
+body:
+  mimeType: application/json
+  text: |-
+    {
+    	"materialId": 1,
+    	"batch" : "Kju6Ac3",
+    	"expires": "2023-03-31",
+    	"quantity": 100,
+    	"userId": 1
+    }
+parameters: []
+headers:
+  - name: Content-Type
+    value: application/json
+authentication: {}
+metaSortKey: -1674399050767
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
