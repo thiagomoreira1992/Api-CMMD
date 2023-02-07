@@ -1,15 +1,19 @@
 import { Request, Response } from "express";
 import { prisma } from "../database/client";
+import { hash, compare} from 'bcryptjs';
+import AppError from "../utils/AppError";
 
 export class UserController {
   async store(req: Request, res: Response) {
     const { userName, password } = req.body;
 
+    const hashedPassword = await hash(password, 8)
+
     try {
       const user = await prisma.user.create({
         data: {
           userName,
-          password,
+          password: hashedPassword,
         },
       });
 
@@ -54,25 +58,31 @@ export class UserController {
   async changePassword(req: Request, res: Response) {
     const { userName, oldPassword, newPassword } = req.body;
 
-    if (oldPassword === newPassword) {
-      return res
-        .status(400)
-        .json({ Error: "New password must be  different from the new one" });
-    }
-
+    if(!oldPassword || !newPassword){
+      throw new AppError('The password or the new password is empty', 400)
+    }    
+    
     try {
+      const hashedNewPassword = await hash(newPassword, 8)
       const user = await prisma.user.findUnique({
         where: {
           userName,
         },
       });
-
+      
       if (!user) {
         return res.status(401).json({ Error: "User doesn't exists" });
       }
+      const checkOldPassword = oldPassword === newPassword
+      
+      const oldPasswordMatch = await compare(user?.password, oldPassword);
 
-      const oldPasswordMatch = user?.password === oldPassword;
-
+      if (checkOldPassword) {
+        return res
+          .status(400)
+          .json({ Error: "New password must be  different from the new one" });
+      }
+      
       if (!oldPasswordMatch) {
         return res.status(401).json({ Error: "Incorrect Password" });
       } else {
@@ -82,7 +92,7 @@ export class UserController {
               userName,
             },
             data: {
-              password: newPassword,
+              password: hashedNewPassword,
             },
           });
 
@@ -92,7 +102,7 @@ export class UserController {
             },
           });
 
-          if (checkPassword?.password === newPassword) {
+          if (await compare(checkPassword?.password , newPassword)) {
             return res.status(201).json("Password has ben changed");
           }
         } catch (error) {
