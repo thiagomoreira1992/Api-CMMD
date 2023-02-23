@@ -102,8 +102,12 @@ export class UserController {
             },
           });
 
-          if (await compare(checkPassword?.password , newPassword)) {
+          if (!checkPassword){
+            throw new AppError("erro")
+          }else{
+            if(await compare(checkPassword.password , newPassword)) {
             return res.status(201).json("Password has ben changed");
+          } 
           }
         } catch (error) {
           return res
