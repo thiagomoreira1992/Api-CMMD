@@ -1,14 +1,18 @@
 import { Request, Response } from "express";
 import { prisma } from "../database/client";
+import AppError from "../utils/AppError";
 
 export class MaterialController {
   async create(req: Request, res: Response) {
+    const user_id = req.user?.id
+    const userId= Number(user_id)
+
     const {
       name,
       presentation,
-      userId,
       categoryId
     } = req.body;
+    console.log(userId, "aqui")
 
     try {
       const materialCheck = await prisma.material.findFirst({
@@ -16,7 +20,8 @@ export class MaterialController {
       });
 
       if (materialCheck) {
-        return res.status(401).json("material existe");
+        throw new AppError("Material already exists", 400)
+        // return res.status(401).json("material existe");
       } else {
         try {
           const material = await prisma.material.create({
@@ -39,18 +44,19 @@ export class MaterialController {
   }
 
   async update(req: Request, res: Response) {
-    const { id, name, presentation, userId, categoryId } = req.body;
+    const { id, name, presentation, categoryId } = req.body;
+    const userId = req.user?.id
 
     // const id = parseInt(idString)
 
-    const materialCheck = await prisma.material.findUnique({
-      where: { id },
-    });
+    try {
+      const materialCheck = await prisma.material.findUnique({
+        where: { id },
+      });
 
-    if (!materialCheck) {
-      return res.status(400).json("material não existe");
-    } else {
-      try {
+      if (!materialCheck) {
+        throw new AppError("Material not exist", 401)
+      } else {
         const material = await prisma.material.update({
           where: { id },
           data: {
@@ -61,19 +67,23 @@ export class MaterialController {
           },
         });
 
-        return res.status(201).json({ material });
-      } catch (error) {
-        res
-          .status(500)
-          .json({ Error: "An error was appeared, contact administrator" });
+        return res.status(201).json({material});
       }
+    } catch (error) {
+      res
+        .json(error);
     }
   }
 
-  async listALl(res: Response) {
-    const material = await prisma.material.findMany();
-
-    return res.status(200).json({ material });
+  async listALl(req: Request,res: Response) {
+    try{
+      const material = await prisma.material.findMany();
+  
+      return res.json( material );
+    }
+    catch(error){
+      res.json(error)
+    }
   }
 
   async delete(req: Request, res: Response) {
@@ -90,20 +100,20 @@ export class MaterialController {
     } else {
       try {
         await prisma.material.delete({
-          where:{
+          where: {
             id
           }
         })
-        
-        return res.status(201).json({Message: "Material was deleted"})   
+
+        return res.status(201).json({ Message: "Material was deleted" })
 
       } catch (error) {
         const stringError: string = error + "";
 
-        if(stringError.includes("foreign")){
-          return res.status(401).json({Error: "Material has a record"})
-        }else{
-          return res.status(500).json({Error: "error"})
+        if (stringError.includes("foreign")) {
+          return res.status(401).json({ Error: "Material has a record" })
+        } else {
+          return res.status(500).json({ Error: "error" })
         }
       }
     }

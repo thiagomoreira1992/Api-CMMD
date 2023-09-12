@@ -1,10 +1,6 @@
-type auth = {
-    secret: string;
-    expiresIn: string;
+const authConfig = {
+    secret: "default",
+    expiresIn: "1d",
 }
 
-export class AuthConfig{
-    getAuthConfig(){
-        return {secret:"default", expiresIn:"1d"}
-        }
-}
+export {authConfig}

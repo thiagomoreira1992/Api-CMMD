@@ -19,6 +19,7 @@ model User {
 
   Material Material[]
   Record   Record[]
+  Movement Movement[]
 }
 
 model Category {
@@ -62,5 +63,7 @@ model Movement {
   recordId  Int
   Record    Record   @relation(fields: [recordId], references: [id], onDelete: Restrict)
   quantity  Int
+  User      User     @relation(fields: [userId], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  userId    Int
   createdAt DateTime @default(now())
 }

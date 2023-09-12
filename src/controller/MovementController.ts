@@ -11,6 +11,7 @@ export class MovementController {
 
     async create(req: Request, res: Response) {
         const { recordId, quantity } = req.body;
+        const  userId = req.user?.id;
 
 
         try {
@@ -39,7 +40,8 @@ export class MovementController {
             const movement = await prisma.movement.create({
                 data:{
                     recordId,
-                    quantity
+                    quantity,
+                    userId
                 }
             })
 

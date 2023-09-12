@@ -5,6 +5,7 @@ import { materialRoutes } from "./material.routes";
 import { recordRoutes } from "./records.routes";
 import { movementRoutes } from "./movement.routes";
 import {sessionRoutes} from "./session.routes"
+import { reportsRoutes } from "./reports.routes";
 
 const routes = Router();
 
@@ -14,6 +15,7 @@ routes.use("/material", materialRoutes)
 routes.use("/records", recordRoutes);
 routes.use("/movements", movementRoutes);
 routes.use("/session", sessionRoutes)
+routes.use("/reports", reportsRoutes)
 
 
 export { routes };
