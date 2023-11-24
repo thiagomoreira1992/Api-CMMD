@@ -5,10 +5,11 @@ import AppError from "../utils/AppError";
 
 
 export class MovementController {
-    async listAll(res: Response) {
+    async listAll(req: Request, response: Response) {
         const movements = await prisma.movement.findMany();
 
-        return res.status(202).json({ movements })
+        return response.status(202).json({movements})
+                    
     }
 
     async create(req: Request, res: Response) {
@@ -23,8 +24,8 @@ export class MovementController {
             }
 
             // Validar a entrada 'quantity'
-            if (typeof quantity !== 'number' || isNaN(quantity) || quantity <= 0) {
-                throw new AppError('Quantity deve ser um número positivo', 400);
+            if (typeof quantity !== 'number' || isNaN(quantity)) {
+                throw new AppError('Quantity deve ser um número', 400);
             }
 
             if(typeof userId !== 'number'|| isNaN(userId)|| userId <= 0){
@@ -65,9 +66,9 @@ export class MovementController {
         }
         catch (error) {
             if(error instanceof AppError){
-                return res.status(error.statusCode).json({ error : error.message})
+                return res.status(error.statusCode).json({ error})
             }else{
-                return res.status(500).json({ error : "Erro interno"})
+                return res.json({ error : "Erro interno"})
             }
         }
     }

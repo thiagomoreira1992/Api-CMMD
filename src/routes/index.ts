@@ -6,6 +6,7 @@ import { recordRoutes } from "./records.routes";
 import { movementRoutes } from "./movement.routes";
 import {sessionRoutes} from "./session.routes"
 import { reportsRoutes } from "./reports.routes";
+import { searchRoutes } from "./search.routes";
 
 const routes = Router();
 
@@ -16,6 +17,7 @@ routes.use("/records", recordRoutes);
 routes.use("/movements", movementRoutes);
 routes.use("/session", sessionRoutes)
 routes.use("/reports", reportsRoutes)
+routes.use("/search", searchRoutes)
 
 
 export { routes };

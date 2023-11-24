@@ -5,3 +5,4 @@ const sessionController = new SessionController();
 
 export const sessionRoutes = Router();
 sessionRoutes.post('/', sessionController.create);
+sessionRoutes.get('/', sessionController.isAuthenticated)

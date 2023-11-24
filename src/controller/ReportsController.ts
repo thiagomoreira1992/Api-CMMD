@@ -14,8 +14,8 @@ export class ReportsController {
             const moves = await prisma.movement.findMany({
                 where: {
                     createdAt: {
-                        lte: `${toDate}T00:00:00.000Z`,
-                        gte: `${fromDate}T23:59:59.999Z`
+                        gte: `${fromDate}T00:00:00.000Z`,
+                        lte: `${toDate}T23:59:59.999Z`
                     }
                 },
                 select: {
@@ -40,7 +40,7 @@ export class ReportsController {
 
                 }
             })
-
+            console.log(moves)
             return res.json({ moves })
         } catch (Error) {
             console.log(Error)
@@ -75,6 +75,13 @@ export class ReportsController {
         })
 
         const records = await prisma.record.findMany({
+            where:{
+                updatedAt: {
+                    lte: toDate,
+                    gte: fromDate
+                }
+   
+            },
             select: {
                 id:true ,
 
@@ -86,15 +93,18 @@ export class ReportsController {
             }
         })
 
-        const recordsWithExpends = records.map(record => {
-            const expendRecords = expends.filter(expend => expend.recordId === record.id);
+        const recordsWithExpends = records.map((record: { id: any; }) => {
+            const expendRecords = expends.filter((expend: { recordId: any; }) => expend.recordId === record.id);
+            //const expendRecords = expends.filter((expend: { recordId: any; }) => expend.crea expend.recordId === record.id);
 
             return {
                 ...record,
-                expends: expendRecords
+                expends: expendRecords,                
             }
         })
 
-        return res.json({ recordsWithExpends})
+        const registro = recordsWithExpends.filter(records => records.expends.length > 0)
+
+        return res.json({registro})
     }
 }

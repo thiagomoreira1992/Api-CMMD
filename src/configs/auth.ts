@@ -1,6 +1,6 @@
 const authConfig = {
     secret: "default",
-    expiresIn: "1d",
+    expiresIn: "1h",
 }
 
 export {authConfig}
