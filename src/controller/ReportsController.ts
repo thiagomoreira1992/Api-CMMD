@@ -51,6 +51,8 @@ export class ReportsController {
     async mounthExpends(req: Request, res: Response) {
         const { date } = req.body;
 
+        console.log(date)
+
         const fromDate = startOfMonth(new Date(date))
         const toDate = lastDayOfMonth(new Date(date))
 

@@ -16,6 +16,8 @@ export class MovementController {
         const { batch, quantity } = req.body;
         const userId = req.user?.id;
 
+        console.log(quantity)
+
         try {
 
             // Validar a entrada 'batch'
